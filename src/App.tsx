@@ -4,7 +4,7 @@ import LoginPage from './pages/LoginPage';
 import WelcomePage from './pages/WelcomePage';
 
 function App() {
-  const some = 'some';
+  const some = 'ssmee';
   return (
     <Router>
       <Routes>
