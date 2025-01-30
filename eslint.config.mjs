@@ -4,9 +4,11 @@ import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import prettier from 'eslint-config-prettier';
 import pluginPrettier from 'eslint-plugin-prettier';
+import eslintConfigAirbnbBase from 'eslint-config-airbnb-base'; // Airbnb base config
+import eslintPluginImport from 'eslint-plugin-import'; // Airbnb plugin for import rules
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [
+const config = [
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
 
   // Add global variables for the browser environment
@@ -17,6 +19,16 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
 
+  // Airbnb's base JavaScript style guide (flat config format)
+  {
+    plugins: {
+      import: eslintPluginImport, // Add import plugin
+    },
+    rules: {
+      ...eslintConfigAirbnbBase.rules, // Add Airbnb base rules directly
+    },
+  },
+
   // Add Prettier plugin and configuration
   {
     plugins: {
@@ -24,6 +36,8 @@ export default [
     },
     rules: {
       'prettier/prettier': 'error', // Highlight Prettier issues as ESLint errors
+      'no-console': 'warn', // Warn on console.log
+      '@typescript-eslint/no-require-imports': 'off', // Allow require if needed
     },
   },
 
@@ -39,4 +53,5 @@ export default [
     },
   },
 ];
-// npx eslint .
+
+export default config;
