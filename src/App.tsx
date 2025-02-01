@@ -1,16 +1,11 @@
-import React from 'react'; // Add this line at the top
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import WelcomePage from './pages/WelcomePage';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
-  const some = 'fdmee';
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/welcome" element={<WelcomePage />} />
-      </Routes>
+      <AppRoutes />
     </Router>
   );
 }

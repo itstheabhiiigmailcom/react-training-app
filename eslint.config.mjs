@@ -9,10 +9,14 @@ import eslintPluginImport from 'eslint-plugin-import'; // Airbnb plugin for impo
 
 /** @type {import('eslint').Linter.Config[]} */
 const config = [
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
+  // Global variables for the browser environment
+  {
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
 
-  // Add global variables for the browser environment
-  { languageOptions: { globals: globals.browser } },
+  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
 
   // Recommended configs for JS, TypeScript, and React
   pluginJs.configs.recommended,
@@ -38,6 +42,7 @@ const config = [
       'prettier/prettier': 'error', // Highlight Prettier issues as ESLint errors
       'no-console': 'warn', // Warn on console.log
       '@typescript-eslint/no-require-imports': 'off', // Allow require if needed
+      'no-unused-vars': 'warn',
     },
   },
 
@@ -49,6 +54,16 @@ const config = [
     settings: {
       react: {
         version: 'detect', // Automatically detect the React version
+      },
+    },
+  },
+
+  // Node environment for postcss and tailwind config files
+  {
+    files: ['**/postcss.config.js', '**/tailwind.config.js'],
+    languageOptions: {
+      globals: {
+        module: 'readonly', // Ensure `module` is recognized in these files
       },
     },
   },
